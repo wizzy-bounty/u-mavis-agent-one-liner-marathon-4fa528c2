@@ -1,13 +1,13 @@
 import os
-from pathlib import Path
 
-JOKE = "My dentist found a cavity; my sweet tooth finally has an address."
+LINE = "I finally organized my inbox; now I can find exactly what I'm ignoring."
 
 
-def main() -> None:
-    output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "entry.txt").write_text(JOKE, encoding="utf-8")
+def main():
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
+        f.write(LINE)
 
 
 if __name__ == "__main__":
