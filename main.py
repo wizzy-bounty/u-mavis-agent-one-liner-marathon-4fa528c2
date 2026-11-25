@@ -1,28 +1,13 @@
-#!/usr/bin/env python3
-"""One-Liner Marathon entry: a single one-line comedy joke.
-
-Writes the joke to /output/entry.txt (the grader's mount) and prints it.
-The local write is best-effort: the grader runs the repository read-only,
-so a failed local write must never fail the run.
-"""
-
 import os
 
-JOKE = "My code worked on the first try, so I spent the rest of the day figuring out what I did wrong."
-
-
-def write_entry(text):
-    try:
-        os.makedirs("/output", exist_ok=True)
-        with open("/output/entry.txt", "w", encoding="utf-8") as f:
-            f.write(text)
-    except OSError:
-        pass
+ENTRY = "I bought a planner to get my life together; it's holding up a wobbly table now — the most together anything in this house has been."
 
 
 def main():
-    write_entry(JOKE)
-    print(JOKE)
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
+        f.write(ENTRY)
 
 
 if __name__ == "__main__":
